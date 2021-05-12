@@ -8,6 +8,8 @@ dash = "*"
 plotly = "*"
 gunicorn = "*"
 dash-bootstrap-components = "*"
+pandas = "*"
+kaggle = "*"
 
 [dev-packages]
 

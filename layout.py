@@ -214,72 +214,6 @@ def get_header():
     return header
 
 
-#####################
-# Nav bar
-def get_navbar(p="main"):
-
-    navbar_main = html.Div(
-        [
-            html.Div([], className="col-4"),
-            html.Div(
-                [
-                    dcc.Link(
-                        html.H4(children="Main", style=navbarcurrentpage),
-                        href="/apps/main",
-                    )
-                ],
-                className="col-2",
-            ),
-            html.Div(
-                [
-                    dcc.Link(
-                        html.H4(children="Example"), href="/apps/example"
-                    )
-                ],
-                className="col-2",
-            ),
-            html.Div([], className="col-4"),
-        ],
-        className="row",
-        style={
-            "background-color": dashboard_colors["dark-blue"],
-            "box-shadow": "2px 5px 5px 1px rgba(255, 101, 131, .5)",
-        },
-    )
-
-    navbar_example = html.Div(
-        [
-            html.Div([], className="col-4"),
-            html.Div(
-                [dcc.Link(html.H4(children="Main"), href="/apps/main",)],
-                className="col-2",
-            ),
-            html.Div(
-                [
-                    dcc.Link(
-                        html.H4(children="Example", style=navbarcurrentpage),
-                        href="/apps/example",
-                    )
-                ],
-                className="col-2",
-            ),
-            html.Div([], className="col-4"),
-        ],
-        className="row",
-        style={
-            "background-color": dashboard_colors["dark-blue"],
-            "box-shadow": "2px 5px 5px 1px rgba(255, 101, 131, .5)",
-        },
-    )
-
-    if p == "main":
-        return navbar_main
-    else:
-        return navbar_example
-
-
-#####################
-# Empty row
 
 
 def get_emptyrow(h="45px"):
@@ -516,8 +450,7 @@ def get_twochartrow():
 ##########################################
 # Row containing two map charts columns
 def get_mapchartrow(
-    firstFile="Maps/IndvListingsMap.html",
-    secondFile="Maps/NeighborhoodCountMap.html",
+    firstFile="Maps/IndvListingsMap.html"
 ):
     twoMapChartRow = html.Div(
         [  # Internal row
@@ -623,59 +556,7 @@ main = html.Div(
                     style=externalgraph_rowstyling,  # External row
                 ),  # External row
             ]
-        ),  # This ends the div after Pagelinks navbar
+        )  # This ends the div after Pagelinks navbar
         #####################
-        # Last row : Nav bar
-        get_navbar("main"),
-    ]
-)
-
-
-####################################################################################################
-# Rental Details : Follows template
-####################################################################################################
-example = html.Div(
-    [
-        #####################
-        # Row 1 : Header
-        get_header(),
-        #####################
-        # Row 2 :
-        html.Div(
-            [
-                html.Div(  # Start of div with 2-col for filters and 9 col for graphs split
-                    [
-                        get_filterbar(),
-                        html.Div(
-                            # This column is to be shared by 4 charts
-                            [
-                                html.Div(
-                                    [
-                                        html.Div(
-                                            [  # External 10-column
-                                                get_KPIrow(),
-                                                get_threechartrow(),
-                                                get_lastchartrow(),
-                                            ],
-                                            className="col-12",
-                                            style=externalgraph_colstyling,
-                                        ),  # External 10-column
-                                        # New div end
-                                    ],
-                                    className="row",
-                                )
-                            ],
-                            className="col-10",
-                            style=externalgraph_colstyling,
-                        ),
-                    ],  # End of div with 2-col and 10-col split
-                    className="row",
-                    style=externalgraph_rowstyling,  # External row
-                ),  # External row
-            ]
-        ),  # This ends the div after Pagelinks navbar
-        #####################
-        # Last row : Nav bar
-        get_navbar("example"),
     ]
 )
