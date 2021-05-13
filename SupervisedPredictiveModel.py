@@ -3,7 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-data = pd.read_csv("data/CleanedData.csv")
+data = pd.read_csv("data/DataForModel.csv")
 Weather_Conditions = data['Weather_Condition'].unique()
 data['Weather_Condition'] = data['Weather_Condition'].astype('category')
 data['Weather_Condition_Encoded'] = data['Weather_Condition'].cat.codes
