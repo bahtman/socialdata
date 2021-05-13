@@ -7,7 +7,6 @@ import plotly.graph_objs as go
 import plotly.express as px
 
 
-from app import app
 from filtering import *
 
 temp = list(map(int,[full_df['Temperature'].quantile(0.005),full_df['Temperature'].quantile(0.995)]))
