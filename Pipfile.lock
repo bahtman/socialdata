@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "98384da618b1e0f4e7e743d5014f37c2384be5b5db93ed047acaef70cc219a1a"
+            "sha256": "e7cbbaddb7f25e801347d0e89e32c2b1170ea85cf0629a4ddf541b20066e634c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,6 +16,14 @@
         ]
     },
     "default": {
+        "branca": {
+            "hashes": [
+                "sha256:62c2e777f074fc1830cd40ba9e650beb941861075980babafead8d97856b1a4b",
+                "sha256:c111453617b17ab2bda60a4cd71787d6f2b59c85cdf71ab160a737606ac66c31"
+            ],
+            "markers": "python_version >= '3.5'",
+            "version": "==0.4.2"
+        },
         "brotli": {
             "hashes": [
                 "sha256:160c78292e98d21e73a4cc7f76a234390e516afcd982fa17e1422f7c6a9ce9c8",
@@ -137,6 +145,13 @@
                 "sha256:d93edd8fc02ae74b73c3df10a8e7ee26dee489c65dedce0b3a1d2ce05ac3d1be"
             ],
             "version": "==1.9.0"
+        },
+        "folium": {
+            "hashes": [
+                "sha256:3d2c48dd6ffe5327975bbfd718468c4e81db9f2844c26e574f878adf4c08b644"
+            ],
+            "index": "pypi",
+            "version": "==0.12.1"
         },
         "future": {
             "hashes": [

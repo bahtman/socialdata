@@ -10,6 +10,7 @@ gunicorn = "*"
 dash-bootstrap-components = "*"
 pandas = "*"
 kaggle = "*"
+folium = "*"
 
 [dev-packages]
 

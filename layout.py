@@ -151,7 +151,8 @@ dashboard_layout = go.Layout(
 
 
 weekmonth_dict = {"daily": "Daily", "week": "Weekly", "month": "Monthly"}
-nbd_groups = get_nbdgroups()
+weather_groups = get_weathergroups()
+state_groups = get_stategroups()
 
 ################################################################################################################################################## SET UP END
 
@@ -174,22 +175,10 @@ nbd_groups = get_nbdgroups()
 def get_header():
 
     header = html.Div(
-        [
-            html.Div(
-                [
-                    html.Img(
-                        src=app.get_asset_url("LogoForDashboard.png"),
-                        height="100%",
-                        width="auto",
-                    )
-                ],
-                className="col-1",
-                style={"vertical-align": "middle"},
-            ),  # Same as img width, allowing to have the title centrally aligned
-            html.Div(
+        [html.Div(
                 [
                     html.H2(
-                        children="Seattle Rental Analysis",
+                        children="US Accidents Dashboard",
                         style={
                             "textAlign": "left",
                             "font-family": "Luminari",
@@ -239,7 +228,7 @@ def get_filterbar():
                     html.Div(
                         [
                             html.H5(
-                                children="Pick a Neighborhood:",
+                                children="Filter the weather conditions:",
                                 style={
                                     "text-align": "left",
                                     "color": dashboard_colors["medium-blue-grey"],
@@ -259,10 +248,10 @@ def get_filterbar():
                             html.Div(
                                 [
                                     dcc.Dropdown(
-                                        id="nbd_dropdown",
+                                        id="weathercond_dropdown",
                                         options=[
-                                            {"label": nbd, "value": nbd,}
-                                            for nbd in nbd_groups
+                                            {"label": cond, "value": cond,}
+                                            for cond in weather_groups
                                         ],
                                         value="All",  # Set the default value
                                         multi=False,
@@ -274,12 +263,87 @@ def get_filterbar():
                                             "white-space": "nowrap",
                                             "text-overflow": "ellipsis",
                                         },
-                                    )
+                                    ),
+                                    
                                 ],
-                                style={"width": "70%", "margin-top": "5px",},
+                                style={"width": "30%", "margin-top": "5px",},
+                            ),
+                            html.Div(
+                                [
+                                    dcc.Dropdown(
+                                        id="test",
+                                        options=[
+                                            {"label": cond, "value": cond,}
+                                            for cond in weather_groups
+                                        ],
+                                        value="All",  # Set the default value
+                                        multi=False,
+                                        style={
+                                            "font-size": "13px",
+                                            "color": dashboard_colors[
+                                                "medium-blue-grey"
+                                            ],
+                                            "white-space": "nowrap",
+                                            "text-overflow": "ellipsis",
+                                        },
+                                    ),
+                                    
+                                ],
+                                style={"width": "30%", "margin-top": "5px",},
                             ),
                         ],
-                        className="col-12",
+                        className="col-6",
+                    ),
+                    html.Div(
+                        [
+                            html.Div(
+                                [
+                                    dcc.Dropdown(
+                                        id="tes2",
+                                        options=[
+                                            {"label": cond, "value": cond,}
+                                            for cond in weather_groups
+                                        ],
+                                        value="All",  # Set the default value
+                                        multi=False,
+                                        style={
+                                            "font-size": "13px",
+                                            "color": dashboard_colors[
+                                                "medium-blue-grey"
+                                            ],
+                                            "white-space": "nowrap",
+                                            "text-overflow": "ellipsis",
+                                        },
+                                    ),
+                                    
+                                ],
+                                style={"width": "30%", "margin-top": "5px",},
+                            ),
+                            html.Div(
+                                [
+                                    dcc.Dropdown(
+                                        id="test2",
+                                        options=[
+                                            {"label": cond, "value": cond,}
+                                            for cond in weather_groups
+                                        ],
+                                        value="All",  # Set the default value
+                                        multi=False,
+                                        style={
+                                            "font-size": "13px",
+                                            "color": dashboard_colors[
+                                                "medium-blue-grey"
+                                            ],
+                                            "white-space": "nowrap",
+                                            "text-overflow": "ellipsis",
+                                        },
+                                    ),
+                                    
+                                ],
+                                style={"width": "30%", "margin-top": "5px",},
+                            ),
+                        ],
+                        className="row",
                     ),
                 ],
                 className="row",
@@ -327,7 +391,7 @@ def get_KPIrow():
     KPIrow = html.Div(
         [  # Internal row
             html.Div(
-                [get_card("total_nbd", dashboard_colors["acid-pink"])],
+                [get_card("mean_sev", dashboard_colors["acid-pink"])],
                 className="col-4",
             ),
             html.Div(
@@ -399,12 +463,12 @@ def get_4placementcard():
 
 ####################################################################
 # Returns a div containing a iFrame holder for a col length = 6
-def get_mapcol(map_id, filename="Maps/IndvListingsMap.html"):
+def get_mapcol(map_id, filename="Maps/Accidentmap.html"):
     """This file returns a Div element that will contain a iFrame that displays a HTML document
 
     Args:
         map_id (str) : Id of the map element 
-        filename (str, optional): [description]. Defaults to "IndvListingsMap.html".
+        filename (str, optional): [description]. Defaults to "Accidentmap.html".
 
     Returns:
         [type]: [html div]
@@ -450,13 +514,12 @@ def get_twochartrow():
 ##########################################
 # Row containing two map charts columns
 def get_mapchartrow(
-    firstFile="Maps/IndvListingsMap.html"
+    firstFile="Maps/Accidentmap.html"
 ):
     twoMapChartRow = html.Div(
         [  # Internal row
             # Chart Column
-            get_mapcol("indv_listing_map", firstFile),  # The listing map id
-            get_mapcol("nbd_map", secondFile),  # The neighborhood group map id
+            get_mapcol("accident_map", firstFile),  # The listing map id
         ],
         className="row",
         style=externalgraph_rowstyling,
@@ -535,8 +598,7 @@ main = html.Div(
                                             [  # External 10-column
                                                 get_KPIrow(),
                                                 get_mapchartrow(
-                                                    "Maps/IndvListingsMap.html",
-                                                    "Maps/NeighborhoodCountMap.html",
+                                                    "Maps/Accidentmap.html"
                                                 ),
                                                 # get_lastchartrow(),  # Internal row
                                             ],
