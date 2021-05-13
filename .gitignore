@@ -4,4 +4,3 @@ venv
 .env
 .ipynb_checkpoints
 data/
-*.zip
