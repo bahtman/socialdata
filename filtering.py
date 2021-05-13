@@ -7,17 +7,14 @@ from zipfile import ZipFile
 
 
 def getDF():
-    if not os.path.isfile("./data/US_Accidents_Dec20_Updated.csv"):
+    if not os.path.isfile("./us-accidents.zip"):
         print('her')
         api = KaggleApi()
         api.authenticate()
         api.dataset_download_files('sobhanmoosavi/us-accidents')
-        print("Zip filen: ",os.path.isfile("./us-accidents.zip"))
 
-        with ZipFile('./us-accidents.zip','r') as zip:
-            zip.extractall('data/') #save files in selected folder
 
-    data = pd.read_csv("./data/US_Accidents_Dec20_Updated.csv")
+    data = pd.read_csv("./us-accidents.zip")
     CleanedData = data.drop(['End_Time','Description','County','Zipcode','Weather_Timestamp','Wind_Direction','Number','Distance(mi)','Airport_Code','Street','Side','Country','Amenity','Bump','Crossing','Give_Way','Junction','No_Exit','Railway','Roundabout','Station','Stop','Traffic_Calming','Traffic_Signal','Turning_Loop','Sunrise_Sunset','Civil_Twilight','Nautical_Twilight','Astronomical_Twilight', 'End_Lat','End_Lng'],axis='columns', inplace=False)
     CleanedData['Temperature'] = CleanedData['Temperature(F)'].apply(lambda x: (x-32)*5/9)
     CleanedData['Wind_Chill'] = CleanedData['Wind_Chill(F)'].apply(lambda x: (x-32)*5/9)
