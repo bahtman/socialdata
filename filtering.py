@@ -7,14 +7,7 @@ from zipfile import ZipFile
 
 
 def getDF():
-    if not os.path.isfile("./us-accidents.zip"):
-        print('her')
-        api = KaggleApi()
-        api.authenticate()
-        api.dataset_download_files('sobhanmoosavi/us-accidents')
-
-
-    data = pd.read_csv("./us-accidents.zip")
+    data = pd.read_csv("./CleanedData.zip")
     CleanedData = data.drop(['End_Time','Description','County','Zipcode','Weather_Timestamp','Wind_Direction','Number','Distance(mi)','Airport_Code','Street','Side','Country','Amenity','Bump','Crossing','Give_Way','Junction','No_Exit','Railway','Roundabout','Station','Stop','Traffic_Calming','Traffic_Signal','Turning_Loop','Sunrise_Sunset','Civil_Twilight','Nautical_Twilight','Astronomical_Twilight', 'End_Lat','End_Lng'],axis='columns', inplace=False)
     CleanedData['Temperature'] = CleanedData['Temperature(F)'].apply(lambda x: (x-32)*5/9)
     CleanedData['Wind_Chill'] = CleanedData['Wind_Chill(F)'].apply(lambda x: (x-32)*5/9)
