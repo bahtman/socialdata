@@ -13,8 +13,9 @@ def getDF():
         api.authenticate()
         api.dataset_download_files('sobhanmoosavi/us-accidents')
         print("Zip filen: ",os.path.isfile("./us-accidents.zip"))
+        print("Zip filen2: ",os.path.isfile("us-accidents.zip"))
 
-        zf = ZipFile('us-accidents.zip')
+        zf = ZipFile('./us-accidents.zip')
         zf.extractall('data/') #save files in selected folder
         zf.close()
 
