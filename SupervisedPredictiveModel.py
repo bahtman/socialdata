@@ -19,12 +19,12 @@ X_test = test_df.drop(labels = ['Severity'], axis = 1, inplace = False)
 y_test = test_df['Severity']
 
 #Scale train set
-X_train_scaled = X_train[['Visibility(mi)','Wind_Speed(mph)','Pressure(in)','Humidity(%)','Temperature(F)','Weather_Condition_Encoded']]
+X_train_scaled = X_train[['Visibility','Wind_Speed','Humidity','Temperature','Weather_Condition_Encoded']]
 scaler = preprocessing.StandardScaler().fit(X_train_scaled)
 X_train_scaled = scaler.transform(X_train_scaled)
 
 #Scale test set_
-X_test_scaled = X_test[['Visibility(mi)','Wind_Speed(mph)','Pressure(in)','Humidity(%)','Temperature(F)','Weather_Condition_Encoded']]
+X_test_scaled = X_test[['Visibility','Wind_Speed','Humidity','Temperature','Weather_Condition_Encoded']]
 scaler = preprocessing.StandardScaler().fit(X_test_scaled)
 X_test_scaled = scaler.transform(X_test_scaled)
 
