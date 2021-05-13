@@ -21,21 +21,6 @@ app.layout = html.Div([
 
 
 
-@app.callback(
-       dash.dependencies.Output('accident_map', 'srcDoc'),
-       [
-       dash.dependencies.Input('temp', 'value'),
-       dash.dependencies.Input('hum', 'value'),
-       dash.dependencies.Input('vis', 'value'),
-       dash.dependencies.Input('wind', 'value'),
-       ]
-       
-)
-def update_chart(temp, humid, vis, wind):
-    filtered_df = filterdf(temp, humid, vis, wind)
-    filename = saveAccidentMapHTML(filtered_df)
-    #filename='Maps/Accidentmap.html'
-    return  open(filename, 'r').read()
 
 @app.callback(
        dash.dependencies.Output('mean_sev', 'children'),
@@ -64,6 +49,51 @@ def update_chart(temp, humid, vis, wind ):
 def update_chart(temp, humid, vis, wind ):   
     filtered_df = filterdf(temp, humid, vis, wind)
     return f"{filtered_df.shape[0]} \n accidents"    
+
+@app.callback(
+       dash.dependencies.Output('states', 'figure'),
+       [
+       dash.dependencies.Input('temp', 'value'),
+       dash.dependencies.Input('hum', 'value'),
+       dash.dependencies.Input('vis', 'value'),
+       dash.dependencies.Input('wind', 'value')
+       ]
+       
+)
+def update_chart(temp, humid, vis, wind ):   
+    filtered_df = filterdf(temp, humid, vis, wind)
+    return plotstates(filtered_df)
+
+@app.callback(
+       dash.dependencies.Output('sev', 'figure'),
+       [
+       dash.dependencies.Input('temp', 'value'),
+       dash.dependencies.Input('hum', 'value'),
+       dash.dependencies.Input('vis', 'value'),
+       dash.dependencies.Input('wind', 'value')
+       ]
+       
+)
+def update_chart(temp, humid, vis, wind ):   
+    filtered_df = filterdf(temp, humid, vis, wind)
+    return plotsev(filtered_df)
+
+
+@app.callback(
+       dash.dependencies.Output('Accident_map', 'srcDoc'),
+       [
+       dash.dependencies.Input('temp', 'value'),
+       dash.dependencies.Input('hum', 'value'),
+       dash.dependencies.Input('vis', 'value'),
+       dash.dependencies.Input('wind', 'value'),
+       ]
+       
+)
+def update_chart(temp, humid, vis, wind):
+    filtered_df = filterdf(temp, humid, vis, wind)
+    filename = saveAccidentMapHTML(filtered_df)
+    #filename='Maps/Accidentmap.html'
+    return  open(filename, 'r').read()
 
 @app.callback(dash.dependencies.Output('page-content', 'children'),
               [dash.dependencies.Input('url', 'pathname')])

@@ -10,10 +10,10 @@ import plotly.express as px
 from app import app
 from filtering import *
 
-temp = list(map(int,[full_df['Temperature'].min(),full_df['Temperature'].max()]))
-hum = list(map(int,[full_df['Humidity'].min(),full_df['Humidity'].max()]))
-vis = list(map(int,[full_df['Visibility'].min(),full_df['Visibility'].max()]))
-wind = list(map(int,[full_df['Wind_Speed'].min(),full_df['Wind_Speed'].max()]))
+temp = list(map(int,[full_df['Temperature'].quantile(0.005),full_df['Temperature'].quantile(0.995)]))
+hum = list(map(int,[full_df['Humidity'].min(),full_df['Humidity'].quantile(0.995)]))
+vis = list(map(int,[full_df['Visibility'].min(),full_df['Visibility'].quantile(0.995)]))
+wind = list(map(int,[full_df['Wind_Speed'].min(),full_df['Wind_Speed'].quantile(0.995)]))
 
 control = dbc.Row([
     dbc.Card(
@@ -125,6 +125,12 @@ main = dbc.Container(
         html.H1("US accidents"),
         html.Hr(),
         control,
+        dbc.Row(
+            [
+                dbc.Col(dcc.Graph(id='sev'), md=6),
+                dbc.Col(dcc.Graph(id='states'), md=6)
+            ]
+        ),
         dbc.Row(
             [
                 dbc.Col(USmap, md=8),
