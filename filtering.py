@@ -13,11 +13,9 @@ def getDF():
         api.authenticate()
         api.dataset_download_files('sobhanmoosavi/us-accidents')
         print("Zip filen: ",os.path.isfile("./us-accidents.zip"))
-        print("Zip filen2: ",os.path.isfile("us-accidents.zip"))
 
-        zf = ZipFile('./us-accidents.zip')
-        zf.extractall('data/') #save files in selected folder
-        zf.close()
+        with ZipFile('./us-accidents.zip','r') as zip:
+            zip.extractall('data/') #save files in selected folder
 
     data = pd.read_csv("./data/US_Accidents_Dec20_Updated.csv")
     CleanedData = data.drop(['End_Time','Description','County','Zipcode','Weather_Timestamp','Wind_Direction','Number','Distance(mi)','Airport_Code','Street','Side','Country','Amenity','Bump','Crossing','Give_Way','Junction','No_Exit','Railway','Roundabout','Station','Stop','Traffic_Calming','Traffic_Signal','Turning_Loop','Sunrise_Sunset','Civil_Twilight','Nautical_Twilight','Astronomical_Twilight', 'End_Lat','End_Lng'],axis='columns', inplace=False)
