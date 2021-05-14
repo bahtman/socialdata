@@ -3,7 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
 from sklearn import preprocessing
 from sklearn.model_selection import train_test_split
-data = pd.read_csv("data/CleanedData.csv")
+data = pd.read_csv("data/DataForModel.csv")
 Weather_Conditions = data['Weather_Condition'].unique()
 data['Weather_Condition'] = data['Weather_Condition'].astype('category')
 data['Weather_Condition_Encoded'] = data['Weather_Condition'].cat.codes
@@ -19,12 +19,12 @@ X_test = test_df.drop(labels = ['Severity'], axis = 1, inplace = False)
 y_test = test_df['Severity']
 
 #Scale train set
-X_train_scaled = X_train[['Visibility(mi)','Wind_Speed(mph)','Pressure(in)','Humidity(%)','Temperature(F)','Weather_Condition_Encoded']]
+X_train_scaled = X_train[['Visibility','Wind_Speed','Humidity','Temperature','Weather_Condition_Encoded']]
 scaler = preprocessing.StandardScaler().fit(X_train_scaled)
 X_train_scaled = scaler.transform(X_train_scaled)
 
 #Scale test set_
-X_test_scaled = X_test[['Visibility(mi)','Wind_Speed(mph)','Pressure(in)','Humidity(%)','Temperature(F)','Weather_Condition_Encoded']]
+X_test_scaled = X_test[['Visibility','Wind_Speed','Humidity','Temperature','Weather_Condition_Encoded']]
 scaler = preprocessing.StandardScaler().fit(X_test_scaled)
 X_test_scaled = scaler.transform(X_test_scaled)
 
