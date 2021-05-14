@@ -5,9 +5,10 @@ from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split, GridSearchCV
 import pandas as pd 
 import matplotlib.pyplot as plt
-data = pd.read_csv("data/DataForModel.csv")
+data = pd.read_csv("DataForModel.csv")
+
 new_severity2_n = int(0.3*len(data['Severity']))
-data_subset = data.drop(['Month', 'Source','TMC','Start_Lat','Start_Lng','State','Unnamed: 0','Weather_Condition'] ,axis = 1, inplace = False)
+data_subset = data[['Visibility','Wind_Speed','Humidity','Temperature','Severity']]
 Severity2_down = data_subset[data_subset['Severity']==2][0:new_severity2_n]
 
 Data_set_finished = pd.concat([data_subset[data_subset['Severity']==1],Severity2_down,data_subset[data_subset['Severity']==3],data_subset[data_subset['Severity']==4]])
@@ -15,7 +16,7 @@ X = Data_set_finished.drop(labels = ['Severity'], axis = 1, inplace = False)
 y = Data_set_finished['Severity']
 X_train, X_test, y_train , y_test= train_test_split(X,y, test_size=1/3, random_state=100)
 
-regr = RandomForestRegressor(max_depth=3, random_state=42)
+regr = RandomForestRegressor(n_estimators=10, random_state=42)
 regr.fit(X_train, y_train)
 
 yhat = regr.predict(X_test)
@@ -25,6 +26,7 @@ print(MSE)
 filename = 'RandomForrestModel.pickle'
 pickle.dump(regr, open(filename, 'wb'))
 
+exit(0)
 ### If we want to hyperparameter tuning
 X_train, y_train = make_regression(n_features=4, n_informative=2,
                          random_state=0, shuffle=False)
