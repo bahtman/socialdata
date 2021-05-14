@@ -1,8 +1,8 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.datasets import make_regression
 import pickle
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.utils import resample
 import pandas as pd 
 import matplotlib.pyplot as plt
 data = pd.read_csv("data/DataForModel.csv")
@@ -20,6 +20,8 @@ regr.fit(X_train, y_train)
 
 yhat = regr.predict(X_test)
 
+MSE = mean_squared_error(y_test, yhat)
+print(MSE)
 filename = 'RandomForrestModel.sav'
 pickle.dump(regr, open(filename, 'wb'))
 
