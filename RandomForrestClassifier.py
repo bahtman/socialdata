@@ -22,7 +22,7 @@ yhat = regr.predict(X_test)
 
 MSE = mean_squared_error(y_test, yhat)
 print(MSE)
-filename = 'RandomForrestModel.sav'
+filename = 'RandomForrestModel.pickle'
 pickle.dump(regr, open(filename, 'wb'))
 
 ### If we want to hyperparameter tuning
