@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 from kaggle.api.kaggle_api_extended import KaggleApi
-from zipfile import ZipFile
+import pickle
 
 
 
@@ -12,6 +12,11 @@ def getDF():
     return data
 
 full_df = getDF()
+
+def getModel():
+    return pickle.load(open("model.pickle","rb"))
+
+#model = getModel()
 
 def get_weathergroups():
     """

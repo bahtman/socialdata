@@ -5,7 +5,7 @@ import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output
 import plotly.graph_objs as go
 import plotly.express as px
-
+import numpy as np
 
 from filtering import *
 
@@ -119,7 +119,7 @@ USmap = html.Div(
 page = dbc.Container(
     [
         
-        html.H1("US accidents"),
+        html.H1("US Accidents"),
         dbc.Tabs(
         [
             dbc.Tab(label="Main", tab_id="main"),
@@ -132,7 +132,7 @@ page = dbc.Container(
         ],
     fluid=True,
 )
-main = dbc.Container([control(0),
+main = (control(0),
         dbc.Row(
             [
                 dbc.Col(dcc.Graph(id='sev'), md=6),
@@ -140,54 +140,410 @@ main = dbc.Container([control(0),
             ]
         ),
         kpis,
-        USmap,
-])
+        USmap)
 
-tour = dbc.Container(
+
+tour = html.Div(
     [
     dbc.Row(
         [
             dbc.Col(
                 [
-                    control(1),
-                    dbc.CardBody(
-                        [
-                            html.P(
-                                id='predict1'
-                            )
-                        ]
+                    dbc.Button(
+                        "Play around with temperature",
+                        id="collapse-temp",
+                        className="mb-3",
+                        color="primary",
                     ),
-                    html.Hr(),
-                    control(2),
-                    dbc.CardBody(
-                        [
-                            html.P(
-                                id='predict2'
-                            )
-                        ]
+                    dbc.Collapse([
+                        dbc.Row([
+                            dbc.Card(
+                            [
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Temperature"),
+                                        dcc.Slider(
+                                            id = f'temp{1}',
+                                            updatemode='drag',
+                                            min=temp[0],
+                                            max=temp[1],
+                                            marks={
+                                                temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
+                                                temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
+                                            },
+                                            value=np.mean(temp),
+                                            disabled=False,
+                                        ),  
+                                    ]
+                                ),
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Humidity"),
+                                        dcc.Slider(
+                                            id = f'hum1',
+                                            min=hum[0],
+                                            max=hum[1],
+                                            marks={
+                                                hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
+                                                hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
+                                            },
+                                            disabled=True,
+                                            value=np.mean(hum)
+                                        ),
+                                    ]
+                                ),
+
+                            ],
+                            body=True,
+                        ),
+                            dbc.Card(
+                                [
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Visibility"),
+                                            dcc.Slider(
+                                                id = f'vis1',
+                                                min=vis[0],
+                                                max=vis[1],
+                                                marks={
+                                                    vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
+                                                    vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=True,
+                                                value=np.mean(vis)
+                                            ),  
+                                        ]
+                                    ),
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Wind Speed"),
+                                            dcc.Slider(
+                                                id = f'wind1',
+                                                min=wind[0],
+                                                max=wind[1],
+                                                marks={
+                                                    wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
+                                                    wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=True,
+                                                value=np.mean(wind)
+
+                                            ),
+                                        ]
+                                    ),
+                                ],
+                                body=True,
+                            ),
+                            ],
+                            align="center",
+                            ),
+                            dbc.Alert(
+                                html.H4(
+                                    id='sev1'
+                                ),
+                                color = "danger"
+                        )],
+                        id="collapse_temp",
+                    )], md=5),
+            dbc.Col([],md=2),
+            dbc.Col([
+                    dbc.Button(
+                        "Play around with visibility",
+                        id="collapse-vis",
+                        className="mb-3",
+                        color="primary",
+                    ),
+                    dbc.Collapse([
+                        dbc.Row([
+                            dbc.Card(
+                            [
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Temperature"),
+                                        dcc.Slider(
+                                            id = f'temp3',
+                                            min=temp[0],
+                                            max=temp[1],
+                                            marks={
+                                                temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
+                                                temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
+                                            },
+                                            disabled=True,
+                                            value=np.mean(temp)
+                                        ),  
+                                    ]
+                                ),
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Humidity"),
+                                        dcc.Slider(
+                                            id = f'hum3',
+                                            min=hum[0],
+                                            max=hum[1],
+                                            marks={
+                                                hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
+                                                hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
+                                            },
+                                            disabled=True,
+                                            value=np.mean(hum)
+                                        ),
+                                    ]
+                                ),
+                            ],
+                            body=True,
+                        ),
+                            dbc.Card(
+                                [
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Visibility"),
+                                            dcc.Slider(
+                                                id = f'vis3',
+                                                updatemode='drag',
+                                                min=vis[0],
+                                                max=vis[1],
+                                                marks={
+                                                    vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
+                                                    vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=False,
+                                                value=np.mean(vis)
+                                            ),  
+                                        ]
+                                    ),
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Wind Speed"),
+                                            dcc.Slider(
+                                                id = f'wind3',
+                                                min=wind[0],
+                                                max=wind[1],
+                                                marks={
+                                                    wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
+                                                    wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=True,
+                                                value=np.mean(wind)
+
+                                            ),
+                                        ]
+                                    ),
+                                ],
+                                body=True,
+                            ),
+                            ],
+                            align="center",
+                            ),
+                            dbc.Alert(
+                                html.H4(
+                                    id='sev3'
+                                ),
+                                color = "danger"
+                        )
+                            ],
+                        id="collapse_vis",
+                    ),
+                ],
+                md=5
+            ),]),
+    dbc.Row([
+            dbc.Col([
+                    dbc.Button(
+                        "Play around with humidity",
+                        id="collapse-hum",
+                        className="mb-3",
+                        color="primary",
+                    ),
+                    dbc.Collapse([
+                        dbc.Row([
+                            dbc.Card(
+                            [
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Temperature"),
+                                        dcc.Slider(
+                                            id = f'temp2',
+                                            min=temp[0],
+                                            max=temp[1],
+                                            marks={
+                                                temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
+                                                temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
+                                            },
+                                            disabled=True,
+                                            value=np.mean(temp)
+                                        ),  
+                                    ]
+                                ),
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Humidity"),
+                                        dcc.Slider(
+                                            id = f'hum2',
+                                            updatemode='drag',
+                                            min=hum[0],
+                                            max=hum[1],
+                                            marks={
+                                                hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
+                                                hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
+                                            },
+                                            disabled=False,
+                                            value=np.mean(hum)
+                                        ),
+                                    ]
+                                ),
+                            ],
+                            body=True,
+                        ),
+                            dbc.Card(
+                                [
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Visibility"),
+                                            dcc.Slider(
+                                                id = f'vis2',
+                                                min=vis[0],
+                                                max=vis[1],
+                                                marks={
+                                                    vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
+                                                    vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=True,
+                                                value=np.mean(vis)
+                                            ),  
+                                        ]
+                                    ),
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Wind Speed"),
+                                            dcc.Slider(
+                                                id = f'wind2',
+                                                min=wind[0],
+                                                max=wind[1],
+                                                marks={
+                                                    wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
+                                                    wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=True,
+                                                value=np.mean(wind)
+
+                                            ),
+                                        ]
+                                    ),
+                                ],
+                                body=True,
+                            ),
+                            ],
+                            align="center",
+                            ),
+                            dbc.Alert(
+                                html.H4(
+                                    id='sev2'
+                                ),
+                                color = "danger"
+                        )
+                            ],
+                        id="collapse_hum",
                     ),
                 ],
                 md=5
             ),
             dbc.Col([],md=2),
-            dbc.Col(
-                [
-                    control(3),
-                    dbc.CardBody(
-                        [
-                            html.P(
-                                id='predict3'
-                            )
-                        ]
+            dbc.Col([
+                    dbc.Button(
+                        "Play around with wind speed",
+                        id="collapse-wind",
+                        className="mb-3",
+                        color="primary",
                     ),
-                    html.Hr(),
-                    control(4),
-                    dbc.CardBody(
-                        [
-                            html.P(
-                                id='predict4'
-                            )
-                        ]
+                    dbc.Collapse([
+                        dbc.Row([
+                            dbc.Card(
+                            [
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Temperature"),
+                                        dcc.Slider(
+                                            id = f'temp4',
+                                            min=temp[0],
+                                            max=temp[1],
+                                            marks={
+                                                temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
+                                                temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
+                                            },
+                                            disabled=True,
+                                            value=np.mean(temp)
+                                        ),  
+                                    ]
+                                ),
+                                dbc.FormGroup(
+                                    [
+                                        dbc.Label("Humidity"),
+                                        dcc.Slider(
+                                            id = f'hum4',
+                                            min=hum[0],
+                                            max=hum[1],
+                                            marks={
+                                                hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
+                                                hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
+                                            },
+                                            disabled=True,
+                                            value=np.mean(hum)
+                                        ),
+                                    ]
+                                ),
+                            ],
+                            body=True,
+                        ),
+                            dbc.Card(
+                                [
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Visibility"),
+                                            dcc.Slider(
+                                                id = f'vis4',
+                                                min=vis[0],
+                                                max=vis[1],
+                                                marks={
+                                                    vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
+                                                    vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=True,
+                                                value=np.mean(vis)
+                                            ),  
+                                        ]
+                                    ),
+                                    dbc.FormGroup(
+                                        [
+                                            dbc.Label("Wind Speed"),
+                                            dcc.Slider(
+                                                id = f'wind4',
+                                                updatemode='drag',
+                                                min=wind[0],
+                                                max=wind[1],
+                                                marks={
+                                                    wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
+                                                    wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
+                                                },
+                                                disabled=False,
+                                                value=np.mean(wind)
+
+                                            ),
+                                        ]
+                                    ),
+                                ],
+                                body=True,
+                            ),
+                            ],
+                            align="center",
+                            ),
+                            dbc.Alert(
+                                html.H4(
+                                    id='sev4'
+                                ),
+                                color = "danger"
+                         )
+                    ],
+                        id="collapse_wind",
                     ),
                 ],
                 md=5
