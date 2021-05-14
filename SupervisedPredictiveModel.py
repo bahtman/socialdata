@@ -39,7 +39,7 @@ yhat = model.predict(X_test)
 acc = accuracy_score(y_test, yhat)
 print(acc)
 
-filename = 'SupervisedPredictiveModel.sav'
+filename = 'SupervisedPredictiveModel.pickle'
 pickle.dump(model, open(filename, 'wb'))
 
 X_test_df = pd.DataFrame(X_test, columns = ['Visibility','Wind_Speed','Humidity','Temperature'])

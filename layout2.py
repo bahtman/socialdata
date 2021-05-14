@@ -134,6 +134,10 @@ page = dbc.Container(
         ),
         
         html.Div(id="tab-content", className="p-4"),
+        html.Footer([
+            dbc.Badge("Project repo", href="https://github.com/bahtman/socialdata", color="primary", className="mr-1"),
+            dbc.Badge("Explainer notebook", href="https://github.com/bahtman/socialdata/blob/master/explainer_notebook.ipynb", color="success", className="mr-1"),
+        ])
         ],
     fluid=True,
 )
