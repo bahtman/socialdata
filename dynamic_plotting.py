@@ -34,7 +34,7 @@ def createMap(df):
     this_map = folium.Map(
         location=[40, -100],#location=[df["Start_Lat"].mean(), df['Start_Lng'].mean()],
         tiles="CartoDB positron",
-        zoom_start=4.5,
+        zoom_start=4,
     )
     values = df[['Start_Lat','Start_Lng']].values
 
