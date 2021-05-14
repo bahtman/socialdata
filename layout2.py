@@ -25,6 +25,7 @@ def control(ids):
                         id = f'temp{ids}',
                         min=temp[0],
                         max=temp[1],
+                        tooltip={"always_visible":False,"placement":"bottom"},
                         marks={
                             temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
                             temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
@@ -40,6 +41,7 @@ def control(ids):
                         id = f'hum{ids}',
                         min=hum[0],
                         max=hum[1],
+                        tooltip={"always_visible":False,"placement":"bottom"},
                         marks={
                             hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
                             hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
@@ -60,6 +62,7 @@ def control(ids):
                             id = f'vis{ids}',
                             min=vis[0],
                             max=vis[1],
+                            tooltip={"always_visible":False,"placement":"bottom"},
                             marks={
                                 vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
                                 vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
@@ -75,6 +78,7 @@ def control(ids):
                             id = f'wind{ids}',
                             min=wind[0],
                             max=wind[1],
+                            tooltip={"always_visible":False,"placement":"bottom"},
                             marks={
                                 wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
                                 wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
@@ -164,7 +168,7 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Temperature"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'temp{1}',
                                             updatemode='drag', step=0.01,
                                             min=temp[0],
@@ -181,7 +185,7 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Humidity"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'hum1',
                                             min=hum[0],
                                             max=hum[1],
@@ -203,7 +207,7 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Visibility"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'vis1',
                                                 min=vis[0],
                                                 max=vis[1],
@@ -219,7 +223,7 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Wind Speed"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'wind1',
                                                 min=wind[0],
                                                 max=wind[1],
@@ -262,10 +266,11 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Temperature"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'temp3',
                                             min=temp[0],
                                             max=temp[1],
+                                            tooltip={"always_visible":False,"placement":"bottom"},
                                             marks={
                                                 temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
                                                 temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
@@ -278,10 +283,11 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Humidity"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'hum3',
                                             min=hum[0],
                                             max=hum[1],
+                                            tooltip={"always_visible":False,"placement":"bottom"},
                                             marks={
                                                 hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
                                                 hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
@@ -299,11 +305,12 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Visibility"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'vis3',
                                                 updatemode='drag', step=0.01,
                                                 min=vis[0],
                                                 max=vis[1],
+                                                tooltip={"always_visible":False,"placement":"bottom"},
                                                 marks={
                                                     vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
                                                     vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
@@ -316,10 +323,11 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Wind Speed"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'wind3',
                                                 min=wind[0],
                                                 max=wind[1],
+                                                tooltip={"always_visible":False,"placement":"bottom"},
                                                 marks={
                                                     wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
                                                     wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
@@ -363,10 +371,11 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Temperature"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'temp2',
                                             min=temp[0],
                                             max=temp[1],
+                                            tooltip={"always_visible":False,"placement":"bottom"},
                                             marks={
                                                 temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
                                                 temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
@@ -379,11 +388,12 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Humidity"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'hum2',
                                             updatemode='drag', step=0.01,
                                             min=hum[0],
                                             max=hum[1],
+                                            tooltip={"always_visible":False,"placement":"bottom"},
                                             marks={
                                                 hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
                                                 hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
@@ -401,10 +411,11 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Visibility"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'vis2',
                                                 min=vis[0],
                                                 max=vis[1],
+                                                tooltip={"always_visible":False,"placement":"bottom"},
                                                 marks={
                                                     vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
                                                     vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
@@ -417,10 +428,11 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Wind Speed"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'wind2',
                                                 min=wind[0],
                                                 max=wind[1],
+                                                tooltip={"always_visible":False,"placement":"bottom"},
                                                 marks={
                                                     wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
                                                     wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
@@ -464,10 +476,11 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Temperature"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'temp4',
                                             min=temp[0],
                                             max=temp[1],
+                                            tooltip={"always_visible":False,"placement":"bottom"},
                                             marks={
                                                 temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
                                                 temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
@@ -480,10 +493,11 @@ tour = html.Div(
                                 dbc.FormGroup(
                                     [
                                         dbc.Label("Humidity"),
-                                        dcc.Slider(
+                                        dcc.Slider(included=False,
                                             id = f'hum4',
                                             min=hum[0],
                                             max=hum[1],
+                                            tooltip={"always_visible":False,"placement":"bottom"},
                                             marks={
                                                 hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
                                                 hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
@@ -501,10 +515,11 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Visibility"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'vis4',
                                                 min=vis[0],
                                                 max=vis[1],
+                                                tooltip={"always_visible":False,"placement":"bottom"},
                                                 marks={
                                                     vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
                                                     vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
@@ -517,11 +532,12 @@ tour = html.Div(
                                     dbc.FormGroup(
                                         [
                                             dbc.Label("Wind Speed"),
-                                            dcc.Slider(
+                                            dcc.Slider(included=False,
                                                 id = f'wind4',
                                                 updatemode='drag', step=0.01,
                                                 min=wind[0],
                                                 max=wind[1],
+                                                tooltip={"always_visible":False,"placement":"bottom"},
                                                 marks={
                                                     wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
                                                     wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
@@ -560,11 +576,12 @@ tour = html.Div(
                 dbc.FormGroup(
                     [
                         dbc.Label("Temperature"),
-                        dcc.Slider(
+                        dcc.Slider(included=False,
                             id = f'temp5',
                             updatemode='drag', step=0.01,
                             min=temp[0],
                             max=temp[1],
+                            tooltip={"always_visible":False,"placement":"bottom"},
                             marks={
                                 temp[0]: {'label': f'{temp[0]}°C', 'style': {'color': '#77b0b1'}},
                                 temp[1]: {'label': f'{temp[1]}°C', 'style': {'color': '#f50'}}
@@ -576,11 +593,12 @@ tour = html.Div(
                 dbc.FormGroup(
                     [
                         dbc.Label("Humidity"),
-                        dcc.Slider(
+                        dcc.Slider(included=False,
                             id = f'hum5',
                             updatemode='drag', step=0.01,
                             min=hum[0],
                             max=hum[1],
+                            tooltip={"always_visible":False,"placement":"bottom"},
                             marks={
                                 hum[0]: {'label': f'{hum[0]}', 'style': {'color': '#77b0b1'}},
                                 hum[1]: {'label': f'{hum[1]}', 'style': {'color': '#f50'}}
@@ -597,11 +615,12 @@ tour = html.Div(
                     dbc.FormGroup(
                         [
                             dbc.Label("Visibility"),
-                            dcc.Slider(
+                            dcc.Slider(included=False,
                                 id = f'vis5',
                                 updatemode='drag', step=0.01,
                                 min=vis[0],
                                 max=vis[1],
+                                tooltip={"always_visible":False,"placement":"bottom"},
                                 marks={
                                     vis[0]: {'label': f'{vis[0]}', 'style': {'color': '#77b0b1'}},
                                     vis[1]: {'label': f'{vis[1]}', 'style': {'color': '#f50'}}
@@ -613,11 +632,12 @@ tour = html.Div(
                     dbc.FormGroup(
                         [
                             dbc.Label("Wind Speed"),
-                            dcc.Slider(
+                            dcc.Slider(included=False,
                                 id = f'wind5',
                                 updatemode='drag', step=0.01,
                                 min=wind[0],
                                 max=wind[1],
+                                tooltip={"always_visible":False,"placement":"bottom"},
                                 marks={
                                     wind[0]: {'label': f'{wind[0]}', 'style': {'color': '#77b0b1'}},
                                     wind[1]: {'label': f'{wind[1]}', 'style': {'color': '#f50'}}
