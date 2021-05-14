@@ -3,6 +3,7 @@ import numpy as np
 import os
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pickle
+import sklearn
 
 
 
@@ -14,9 +15,9 @@ def getDF():
 full_df = getDF()
 
 def getModel():
-    return pickle.load(open("model.pickle","rb"))
+    return pickle.load(open("RandomForrestModel.pickle","rb"))
 
-#model = getModel()
+model = getModel()
 
 def get_weathergroups():
     """

@@ -76,10 +76,20 @@ def plotstates(filtered_df):
         temp.append(population[GroupedDataHyp['State'].iloc[i]])
     GroupedDataHyp['population'] = temp
     GroupedDataHyp['normalized'] = GroupedDataHyp['Count'].div(GroupedDataHyp['population']*0.0001)
-    return px.bar(GroupedDataHyp, x='State', y ='normalized')
+    fig = px.bar(GroupedDataHyp, x='State', y ='normalized')
+    fig.update_layout(title="Distribution of accidents across US states",
+                        xaxis_title="State",
+                        yaxis_title="Amount of accidents per capita"
+                        )
+    return fig
 
 def plotsev(filtered_df):
     #Plot hyppighed af severity:
     GroupedDataServerity = filtered_df.groupby(['Severity']).count()
     GroupedDataServerity = GroupedDataServerity.iloc[:,0].reset_index(name='Count')
-    return px.bar(GroupedDataServerity, x='Severity', y ='Count')
+    fig = px.bar(GroupedDataServerity, x='Severity', y ='Count')
+    fig.update_layout(title="Distribution of severity",
+                        xaxis_title="Severity",
+                        yaxis_title="Amount of accidents"
+                        )
+    return fig

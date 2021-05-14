@@ -11,6 +11,7 @@ dash-bootstrap-components = "*"
 pandas = "*"
 kaggle = "*"
 folium = "*"
+sklearn = "*"
 
 [dev-packages]
 

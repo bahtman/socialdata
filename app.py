@@ -27,7 +27,7 @@ def controlinput(ids):
        dash.dependencies.Input(f'wind{ids}', 'value')
        ]
 def sev_prediciton(temp, humid, vis, wind):
-    prediction = model.predict([[temp,humid,vis,wind]])
+    prediction = model.predict([[temp,vis,wind,humid]])
     return prediction[0]
 
 @app.callback(
@@ -121,9 +121,9 @@ def toggle_wind(n, is_open):
        
 )
 def update_chart(temp, humid, vis, wind ):   
-    out = temp+humid+vis+wind
-    #out = sev_prediciton(temp, humid, vis, wind )
-    return f"Severity is predicted to be {out}, with temperature: {temp}"
+    #out = temp+humid+vis+wind
+    out = sev_prediciton(temp, humid, vis, wind )
+    return f"Severity is predicted to be {out:.2f}, with temperature: {temp:.2f}"
 
 @app.callback(
        dash.dependencies.Output('sev2', 'children'),
@@ -131,9 +131,9 @@ def update_chart(temp, humid, vis, wind ):
        
 )
 def update_chart(temp, humid, vis, wind ):   
-    out = temp+humid+vis+wind
-    #out = sev_prediciton(temp, humid, vis, wind )
-    return f"Severity is predicted to be {out}, with humidity: {humid}"
+    #out = temp+humid+vis+wind
+    out = sev_prediciton(temp, humid, vis, wind )
+    return f"Severity is predicted to be {out:.2f}, with humidity: {humid:.2f}"
 
 
 @app.callback(
@@ -142,9 +142,9 @@ def update_chart(temp, humid, vis, wind ):
        
 )
 def update_chart(temp, humid, vis, wind ):   
-    out = temp+humid+vis+wind
-    #out = sev_prediciton(temp, humid, vis, wind )
-    return f"Severity is predicted to be {out}, with visibility: {vis}"
+    #out = temp+humid+vis+wind
+    out = sev_prediciton(temp, humid, vis, wind )
+    return f"Severity is predicted to be {out:.2f}, with visibility: {vis:.2f}"
 
 @app.callback(
        dash.dependencies.Output('sev4', 'children'),
@@ -152,10 +152,18 @@ def update_chart(temp, humid, vis, wind ):
        
 )
 def update_chart(temp, humid, vis, wind ):   
-    out = temp+humid+vis+wind
-    #out = sev_prediciton(temp, humid, vis, wind )
-    return f"Severity is predicted to be {out}, with wind speed: {wind}"
-
+    #out = temp+humid+vis+wind
+    out = sev_prediciton(temp, humid, vis, wind )
+    return f"Severity is predicted to be {out:.2f}, with wind speed: {wind:.2f}"
+@app.callback(
+       dash.dependencies.Output('sev5', 'children'),
+       controlinput(5)
+       
+)
+def update_chart(temp, humid, vis, wind ):   
+    #out = temp+humid+vis+wind
+    out = sev_prediciton(temp, humid, vis, wind )
+    return f"Severity is predicted to be {out:.2f}"
 
 
 @app.callback(
